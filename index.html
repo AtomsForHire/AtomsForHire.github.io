@@ -4,6 +4,34 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css"> </link>
+
+        <style>
+            /* Styling for the comments */
+            #comments {
+                background-color: white;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+
+            /* Styling for each comment */
+            .comment {
+                margin-bottom: 10px;
+                color: black; /* Set text color to black */
+            }
+
+            /* Styling for delete button */
+            .delete-button {
+                background-color: #ff6347;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+          </style>
+
     </head>
     <body style="background-image: url('./temp.jpg');">
         <div class="container">
@@ -73,6 +101,59 @@
             <iframe width="420" height="210"
             src="https://www.youtube.com/embed/?v=CkB9eTwLO1sautoplay=1&mute=1">
             </iframe>
+
+            <center> <h1> Please write any comments the rabble may have here: <h1> </center>
+
+            <!-- Form for user input -->
+            <form id="commentForm">
+              <label for="comment">Your Comment:</label><br>
+              <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br>
+              <input type="submit" value="Submit">
+            </form>
+
+            <hr>
+
+            <!-- Display area for comments -->
+            <div id="comments">
+              <!-- Comments will be displayed here -->
+            </div>
+
+            <script>
+              // Function to handle form submission
+              document.getElementById('commentForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission behavior
+
+              // Get the comment from the form input
+              var commentText = document.getElementById('comment').value;
+
+              // Create a div element to contain the comment and delete button
+              var commentDiv = document.createElement('div');
+              commentDiv.classList.add('comment');
+
+              // Create a paragraph element to display the comment
+              var commentElement = document.createElement('p');
+              commentElement.textContent = commentText;
+
+              // Create a delete button for the comment
+              var deleteButton = document.createElement('button');
+              deleteButton.textContent = 'Delete';
+              deleteButton.classList.add('delete-button');
+              deleteButton.addEventListener('click', function() {
+                  commentDiv.remove(); // Remove the comment element when delete button is clicked
+              });
+
+              // Append the comment element and delete button to the comment container div
+              commentDiv.appendChild(commentElement);
+              commentDiv.appendChild(deleteButton);
+
+              // Append the comment container div to the comments section
+              document.getElementById('comments').appendChild(commentDiv);
+
+              // Reset the form input
+              document.getElementById('comment').value = '';
+            });
+          </script>
+
         </div>
     </body>
 </html>
